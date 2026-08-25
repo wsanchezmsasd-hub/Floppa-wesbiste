@@ -3,3 +3,6 @@ body {
     background-color: #000000;
     font-family: "Comic Neue", "Comic Sans MS", "Comic Sans", cursive;
 }
+
+.subtitle {color: firebrick;}
+#page-title {font-size: 40px; color: crimson;}
