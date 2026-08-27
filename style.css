@@ -1,8 +1,14 @@
 body {
     color: #ffffff;
-    background-color: #000000;
+    background-color: rgb(160, 25, 25);
     font-family: "Comic Neue", "Comic Sans MS", "Comic Sans", cursive;
 }
 
-.subtitle {color: firebrick;}
+.subtitle {
+    color: rgb(226, 42, 42);
+    border: firebrick;
+    padding: 10px;
+    margin: 100px;
+    width: 300px;
+}
 #page-title {font-size: 40px; color: crimson;}
