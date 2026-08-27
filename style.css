@@ -6,7 +6,7 @@ body {
 
 .subtitle {
     color: rgb(226, 42, 42);
-    border: firebrick;
+    border: solid firebrick;
     padding: 10px;
     margin: auto;
     width: 300px;
