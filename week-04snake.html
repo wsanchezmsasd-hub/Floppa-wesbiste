@@ -7,8 +7,17 @@
 <body>
   <p><a href="index.html">Back to Ittalian brainrot shrine</a></p>
   <h1>Funny snae gameee</h1>
-  <canvas id="funnySnake" width="800" height="800"></canvas>
-
-
+  <canvas id="funnySnake" width="400" height="400"></canvas>
 </body>
+<script>
+  var canvas = document.getElementById("funnySnake");
+  var ctx = canvas.getcontext("2d");
+  var CELL = 20;
+  var snake = {x: 20, y: 20 };
+  ctx.fillStyle= "black";
+  ctx.fillRect(0, 0, 400, 400);
+
+  ctx.fillStyle = "red";
+  ctx.fillRect(snake.x * CELL, snake.y * CELL, CELL, CELL);
+</script>
 </html>
