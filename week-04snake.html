@@ -13,11 +13,23 @@
   var canvas = document.getElementById("funnySnake");
   var ctx = canvas.getContext("2d");
   var CELL = 20;
-  var snake = {x: 5, y: 5 };
-  ctx.fillStyle= "black";
+  var snake = {x: 10, y: 10 };
+  var speed = 100;
+  function DrawFunnyBoard() {
+  ctx.fillStyle= "#00ee00";
   ctx.fillRect(0, 0, 400, 400);
-
-  ctx.fillStyle = "red";
+  
+  ctx.fillStyle = "#ff0000";
   ctx.fillRect(snake.x * CELL, snake.y * CELL, CELL, CELL);
+
+  ctx.fillStyle = "#00ffff";
+  ctx.fillRect(snake.x, snake.y, 20, 20);
+  }
+  function step() {
+    if (snake.x > 399) {snake.x = 0}
+    snake.x = snake.x + 15;
+    DrawFunnyBoard();
+  }
+  setInterval(step, speed); 
 </script>
 </html>
