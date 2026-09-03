@@ -17,7 +17,7 @@
   var speed = 100;
   function DrawFunnyBoard() {
   ctx.fillStyle= "#00ee00";
-  ctx.fillRect(0, 0, 400, 400);
+  ctx.fillRect(0, 0, 600, 600);
   
   ctx.fillStyle = "#ff0000";
   ctx.fillRect(snake.x * CELL, snake.y * CELL, CELL, CELL);
@@ -25,9 +25,22 @@
   ctx.fillStyle = "#00ffff";
   ctx.fillRect(snake.x, snake.y, 20, 20);
   }
+  var dx =20;
+  var dy =0;
   function step() {
-    if (snake.x > 399) {snake.x = 0}
-    snake.x = snake.x + 15;
+    document.addEventListener("keydown", function(event) {
+  console.log(event.key);
+    if (event.key==="a") {dy = 0; dx = -20;}
+    if (event.key==="s") {dy=20;dx=0;}
+    if (event.key==="w") {dy=-20;dx=0}
+    if (event.key==="d") {dy=0;dx=20}
+    });
+    if (snake.x > 399) {snake.x = 1} 
+    if (snake.x < 0) {snake.x = 399}
+    if (snake.y > 399) {snake.y = 1}
+    if (snake.y < 1) {snake.y = 399}
+    snake.x = snake.x + dx;
+    snake.y = snake.y + dy;
     DrawFunnyBoard();
   }
   setInterval(step, speed); 
