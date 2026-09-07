@@ -1,49 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>funny snak gam</title>
+  <title>funny snak gameew</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <p><a href="index.html">Back to Ittalian brainrot shrine</a></p>
-  <h1>Funny snae gameee</h1>
-  <canvas id="funnySnake" width="400" height="400"></canvas>
-</body>
-  <iframe src="https://scratch.mit.edu/projects/807117000/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
-<script>
-  var canvas = document.getElementById("funnySnake");
-  var ctx = canvas.getContext("2d");
-  var CELL = 20;
-  var snake = {x: 10, y: 10 };
-  var speed = 100;
-  function DrawFunnyBoard() {
-  ctx.fillStyle= "#00ee00";
-  ctx.fillRect(0, 0, 600, 600);
-  
-  ctx.fillStyle = "#ff0000";
-  ctx.fillRect(snake.x * CELL, snake.y * CELL, CELL, CELL);
+  <h1>funny snak gameew</h1>
+  <p><a href="index.html">Back to brainrot shrine</a></p>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
 
-  ctx.fillStyle = "#00ffff";
-  ctx.fillRect(snake.x, snake.y, 20, 20);
-  }
-  var dx =20;
-  var dy =0;
-  function step() {
+  <script>
+    // --- SETUP ---
+    var canvas = document.getElementById("gameCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // --- GAME STATE ---
+    var snake = { x: 20, y: 20 };
+    var dx = 20;                  
+    var dy = 0;                   
+    var body = [];                
+    var snakeLength = 3;          
+    var apple = { x: 200, y: 200 };
+
+    // --- DRAWING FUNCTION ---
+    function drawBoard() {
+      ctx.fillStyle = "#1b1b1b";
+      ctx.fillRect(0, 0, 400, 400);
+
+      ctx.fillStyle = "red";
+      ctx.fillRect(apple.x, apple.y, 20, 20);
+
+      ctx.fillStyle = "#3ddc84";
+      ctx.fillRect(snake.x, snake.y, 20, 20);
+      
+      for (var i = 0; i < body.length; i++) {
+        ctx.fillRect(body[i].x, body[i].y, 20, 20);
+      }
+    }
+
+    var timer = setInterval(step, 100);
+
+    // --- MAIN GAME LOOP ---
+    function step() {
+      // 1. Move the snake head
+      snake.x = snake.x + dx;
+      snake.y = snake.y + dy;
+
+      // 2. Wrap around screen edges
+      if (snake.x > 380) { snake.x = 0; }
+      if (snake.x < 0) { snake.x = 380; }
+      if (snake.y > 380) { snake.y = 0; }
+      if (snake.y < 0) { snake.y = 380; }
+
+      // 3. Track the body
+      body.push({ x: snake.x, y: snake.y });
+      while (body.length > snakeLength) {
+        body.shift();
+      }
+
+      // 4. Check for Apple Collision
+      if (
+        snake.x < apple.x + 20 &&
+        snake.x + 20 > apple.x &&
+        snake.y < apple.y + 20 &&
+        snake.y + 20 > apple.y
+      ) {
+        snakeLength = snakeLength + 1; 
+        apple.x = Math.floor(Math.random() * 20) * 20;
+        apple.y = Math.floor(Math.random() * 20) * 20;
+      }
+
+      // 5. Check for Game Over (Self Collision)
+      for (var i = 0; i < body.length - 1; i++) {
+        if (body[i].x === snake.x && body[i].y === snake.y) {
+          // INSTEAD of stopping the game, we reset all variables to their starting state
+          snake = { x: 20, y: 20 };
+          dx = 20;
+          dy = 0;
+          body = [];
+          snakeLength = 3;
+          apple = { x: 200, y: 200 };
+          
+          return; // Exit this frame early so it starts clean on the next tick
+        }
+      }
+
+      // 6. Draw the updated state to the screen
+      drawBoard();
+    }
+
+    // --- CONTROLS ---
     document.addEventListener("keydown", function(event) {
-  console.log(event.key);
-    if (event.key==="a") {dy = 0; dx = -20;}
-    if (event.key==="s") {dy=20;dx=0;}
-    if (event.key==="w") {dy=-20;dx=0}
-    if (event.key==="d") {dy=0;dx=20}
+      if (event.key === "ArrowRight") {
+        dx = 20;
+        dy = 0;
+      }
+      if (event.key === "ArrowLeft") {
+        dx = -20;
+        dy = 0;
+      }
+      if (event.key === "ArrowUp") {
+        dx = 0;
+        dy = -20;
+      }
+      if (event.key === "ArrowDown") {
+        dx = 0;
+        dy = 20;
+      }
     });
-    if (snake.x > 399) {snake.x = 1} 
-    if (snake.x < 0) {snake.x = 399}
-    if (snake.y > 399) {snake.y = 1}
-    if (snake.y < 1) {snake.y = 399}
-    snake.x = snake.x + dx;
-    snake.y = snake.y + dy;
-    DrawFunnyBoard();
-  }
-  setInterval(step, speed); 
-</script>
+  </script>
+</body>
 </html>
+
