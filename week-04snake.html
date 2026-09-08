@@ -24,13 +24,13 @@
 
     // --- DRAWING FUNCTION ---
     function drawBoard() {
-      ctx.fillStyle = "#1b1b1b";
+      ctx.fillStyle = "#00ff33";
       ctx.fillRect(0, 0, 400, 400);
 
       ctx.fillStyle = "red";
       ctx.fillRect(apple.x, apple.y, 20, 20);
 
-      ctx.fillStyle = "#3ddc84";
+      ctx.fillStyle = "#ffff00";
       ctx.fillRect(snake.x, snake.y, 20, 20);
       
       for (var i = 0; i < body.length; i++) {
@@ -74,12 +74,12 @@
       for (var i = 0; i < body.length - 1; i++) {
         if (body[i].x === snake.x && body[i].y === snake.y) {
           // INSTEAD of stopping the game, we reset all variables to their starting state
-          snake = { x: 20, y: 20 };
+          snake = { x: 200, y: 200 };
           dx = 20;
           dy = 0;
           body = [];
           snakeLength = 3;
-          apple = { x: 200, y: 200 };
+          apple = { x: Math.floor(Math.random() * 20) * 20, y: Math.floor(Math.random() * 20) * 20 };
           
           return; // Exit this frame early so it starts clean on the next tick
         }
